@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
     public void GerarRelatorio (View view) {
         EditText nome = (EditText) findViewById(R.id.editTextTextPersonName);
         EditText idade = (EditText) findViewById(R.id.editTextNumber);
-        EditText peso = (EditText) findViewById(R.id.editTextNumberDecimal2);
         EditText altura = (EditText) findViewById(R.id.editTextNumberDecimal);
+        EditText peso = (EditText) findViewById(R.id.editTextNumberDecimal2);
         Log.d("altura",altura.getText().toString());
         boolean valido = (!nome.getText().toString().equals("") && !idade.getText().toString().equals("") && !peso.getText().toString().equals("") && !altura.getText().toString().equals("") && Double.parseDouble(altura.getText().toString())>0);
         if (valido) {
@@ -58,42 +58,12 @@ public class MainActivity extends AppCompatActivity {
             dados.putString("idade",idade.getText().toString());
             dados.putString("peso",peso.getText().toString());
             dados.putString("altura",altura.getText().toString());
-            dados.putDouble("imc",Double.parseDouble(String.format("%.2f",imc)));
-            dados.putString("classificacao", calculaimc());
 
             relato.putExtras(dados);
             startActivity(relato);
         } else {
-            Log.d("ASFASF", "asfasfasf");
+            Log.d("faltando coisa", "soltar mensagem");
             Toast.makeText(this, "Dados Incompletos", 3000).show();
         }
     }
-
-    String calculaimc (){
-        EditText peso = (EditText) findViewById(R.id.editTextNumberDecimal2);
-        EditText altura = (EditText) findViewById(R.id.editTextNumberDecimal);
-        double imc = Double.parseDouble(peso.getText().toString())/(Double.parseDouble(altura.getText().toString())*Double.parseDouble(altura.getText().toString()));
-        String classificacao = new String();
-        if (imc < 18.5) {
-            classificacao = "Abaixo do Peso";
-        }
-        else if (18.5 < imc && imc < 24.9) {
-            classificacao = "Saudável";
-        }
-        else if (25 < imc && imc < 29.9) {
-            classificacao = "Sobrepeso";
-        }
-        else if (30 < imc && imc < 34.9) {
-            classificacao = "Obesidade Grau I";
-        }
-        else if (35 < imc && imc < 39.9) {
-            classificacao = "Obesidade Grau II(severa)";
-        }
-        else if (imc > 40) {
-            classificacao = "Obesidade Grau III(morbida)";
-        }
-        return classificacao;
-    }
-
-
 }
